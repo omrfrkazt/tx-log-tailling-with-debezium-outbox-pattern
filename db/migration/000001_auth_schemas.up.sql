@@ -1,5 +1,6 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE "users" (
-  "id" BIGINT,
+  "id" SERIAL PRIMARY KEY ,
   "account_id" BIGINT NOT NULL DEFAULT 0,
   "email" varchar UNIQUE NOT NULL,
   "phone" varchar UNIQUE NOT NULL,
@@ -17,8 +18,7 @@ CREATE TABLE "users" (
   "last_login_raw" text NOT NULL,
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp,
-  "deleted_at" timestamp,
-  PRIMARY KEY ("id")
+  "deleted_at" timestamp
 );
 
 CREATE TABLE "kyc" (
@@ -50,6 +50,20 @@ CREATE TABLE "admin" (
   "updated_at" timestamp,
   "deleted_at" timestamp
 );
+
+CREATE TABLE "outbox_event" (
+  "id" uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  "aggregatetype" varchar NOT NULL,
+  "aggregateid" varchar NOT NULL,
+  "type" varchar NOT NULL,
+  "payload" varchar NOT NULL
+);
+
+CREATE INDEX ON "outbox_event" ("id");
+
+CREATE INDEX ON "outbox_event" ("type");
+
+CREATE INDEX ON "outbox_event" ("aggregateid");
 
 CREATE INDEX ON "users" ("phone");
 

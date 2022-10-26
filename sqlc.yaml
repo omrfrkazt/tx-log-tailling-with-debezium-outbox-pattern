@@ -1,6 +1,6 @@
 version: 1
 packages:
-  - path: "./db/sqlc"
+  - path: "./internal/store/"
     name: "authdb"
     engine: "postgresql"
     schema: "./db/migration"

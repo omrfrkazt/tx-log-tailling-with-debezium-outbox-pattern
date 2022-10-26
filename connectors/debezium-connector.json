@@ -9,11 +9,15 @@
     "database.password": "secret",
     "database.dbname": "auth",
     "database.server.name": "postgres",
-    "slot.name": "auth_slot",
     "key.converter": "org.apache.kafka.connect.storage.StringConverter",
     "key.converter.schemas.enable": "false",
     "value.converter": "org.apache.kafka.connect.json.JsonConverter",
     "value.converter.schemas.enable": "false",
-    "include.schema.changes": "false"
+    "include.schema.changes": "false",
+    "table.whitelist": "public.outbox_event",
+    "transforms": "outbox",
+    "transforms.outbox.type":"io.debezium.transforms.outbox.EventRouter",
+    "transforms.outbox.route.topic.replacement" : "auth.events",
+    "transforms.outbox.table.fields.additional.placement":"eventType:header:type"
   }
 }

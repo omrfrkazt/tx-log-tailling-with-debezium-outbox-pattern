@@ -39,3 +39,13 @@ WHERE id = $1;
 
 -- name: DeleteUSer :exec
 DELETE FROM users WHERE id = $1;
+
+-- name: AddOutbox :one
+INSERT INTO outbox_event (
+aggregatetype,
+aggregateid,
+type,
+payload
+) VALUES (
+$1,$2,$3,$4
+) RETURNING *;
