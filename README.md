@@ -4,7 +4,8 @@
 
 
 https://medium.com/trendyol-tech/transaction-log-tailing-with-debezium-part-1-aeb968d72220
-
+https://debezium.io/blog/2019/02/19/reliable-microservices-data-exchange-with-the-outbox-pattern
+https://www.youtube.com/watch?v=6nU9i022yeY
 
 <img src="./dbz.png" alt="Debezium with Kafka">
 
